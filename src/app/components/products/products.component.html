@@ -1,0 +1,49 @@
+<div></div>
+<!--//Event binding******************* -->
+
+<button (click)="change()">click</button>
+
+<div class="card-deck row row-cols-md-4">
+  @for(prd of products;track trackProduvt;let i=$index){
+
+  <!--//style binind ************-->
+  <div class="card my-3 mx-3" appHighlightCard="red">
+    <!-- class binding*******************  -->
+    <img class="card-img-top" [src]="prd.imgurl" alt="Card image cap" />
+    <div class="card-body">
+      <h5 class="card-title">{{ prd.name }}</h5>
+      <p class="card-text">price {{ prd.price | currency }}</p>
+      <p class="card-text">quntity {{ prd.quntity }}</p>
+      <ng-template #lastItem><p>Quintity-last Item</p></ng-template>
+    </div>
+    <div class="container d-flex justify-content-around">
+      <button
+        class="bg-success"
+        routerLink="/details"
+        (click)="navigateToDateil(prd.id)"
+      >
+        Details
+      </button>
+      <button
+        class="bg-info text-white"
+        routerLink="/details"
+        (click)="updateCurrentProduct(prd.id)"
+      >
+        Update
+      </button>
+      <button class="bg-danger text-white" (click)="remove(prd.id)">
+        Remove
+      </button>
+    </div>
+    <input type="number" #countINP />
+    <button class="btn btn-success" (click)="buy(countINP.value, prd.price, i)">
+      BUY NOW !!!
+    </button>
+  </div>
+  <ng-template #outOfStock class="display-flex"
+    ><p>Out of stock</p></ng-template
+  >
+  }@empty {
+  <h1>Out of Stock</h1>
+  }
+</div>

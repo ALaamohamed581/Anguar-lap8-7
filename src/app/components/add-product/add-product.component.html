@@ -1,0 +1,120 @@
+<form
+  (submit)="currindeID && update(product); !currindeID && addProduct(product)"
+  #addUdapteForm="ngForm"
+>
+  <div class="form-group">
+    <label for="exampleInputEmail1">name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      [(ngModel)]="product.name"
+      name="name"
+      required
+      #input="ngModel"
+      pattern="^[a-zA-Z]{3,15}$"
+    />@if(input.invalid && input.touched){
+
+    <div class="text-danger">
+      @if(input.errors?.['required']){
+      <p>name is reqcquired</p>
+      } @if(input.errors?.['pattern']){
+
+      <p>name must be at least 3 chacters</p>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">id</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      [(ngModel)]="product.id"
+      name="Id"
+      required
+      #productID="ngModel"
+      pattern="^\d+$"
+    />
+    @if(productID.invalid && productID.touched){
+
+    <div class="text-danger">
+      @if(productID.errors?.['required']){
+      <p>product id is reqcquired</p>
+      } @if(productID.errors?.['pattern']){
+
+      <p>Id must be in numbers</p>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="exampleInputPassword1"
+      [(ngModel)]="product.price"
+      name="price"
+      required
+      #ProductPrice="ngModel"
+    />
+    @if(ProductPrice.invalid && ProductPrice.touched){
+
+    <div class="text-danger">
+      @if(ProductPrice.errors?.['required']){
+      <p>product Price is reqcquired</p>
+      } @if(ProductPrice.errors?.['pattern']){
+
+      <p>Price must be in numbers</p>
+      }
+    </div>
+
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Quntity</label>
+    <input
+      type="number"
+      class="form-control"
+      id="exampleInputPassword1"
+      [(ngModel)]="product.quntity"
+      name="quntity"
+    />
+    />
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Img:</label>
+    <input
+      type="file"
+      class="form-control"
+      id="exampleInputPassword1"
+      [(ngModel)]="product.imgurl"
+      name="img"
+    />
+  </div>
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    type="text"
+    [(ngModel)]="product.catId"
+    name="catID"
+  >
+    categories @for(cat of categories;track cat.id ){
+    <option>{{ cat.name }}</option>
+    }
+  </select>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="addUdapteForm.invalid"
+  >
+    Submit
+  </button>
+</form>

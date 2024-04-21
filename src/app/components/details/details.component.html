@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="card" style="width: 18rem">
+    <img [src]="prodduct?.imgurl" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">{{ prodduct?.name }}</h5>
+      <h5 class="card-title">{{ prodduct?.id }}</h5>
+      <p class="card-text">{{ prodduct?.price }}</p>
+      <button class="btn bg-warning" (click)="GoBack()">GO Back</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <button
+    class="btn bg-success"
+    (click)="previous(prodduct?.id)"
+    [disabled]="currentId == idsArra[0]"
+  >
+    Preivous Item
+  </button>
+  <button
+    class="btn bg-danger"
+    (click)="next(prodduct?.id)"
+    [disabled]="currentId == idsArra[idsArra.length - 1]"
+  >
+    Next item
+  </button>
+</div>
